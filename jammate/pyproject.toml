@@ -36,6 +36,12 @@ dev-dependencies = [
 
 [tool.poetry]
 package-mode = false
+name = "jammate"
+version = "0.1.0"
+description = ""
+authors = [
+    "s-anzai <s-anzai@wwwave.jp>"
+]
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.27.4"}
