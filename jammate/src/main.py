@@ -1,26 +1,22 @@
 import flet as ft
-
+from pages.home.page import home_view
+from pages.bands.page import bands_view
+from pages.not_found import not_found_view
 
 def main(page: ft.Page):
-    counter = ft.Text("0", size=50, data=0)
+    def route_change(e: ft.RouteChangeEvent):
+        page.views.clear()
 
-    def increment_click(e):
-        counter.data += 1
-        counter.value = str(counter.data)
-        counter.update()
+        if e.route == "/":
+            page.views.append(home_view(page))
+        elif e.route == "/bands":
+            page.views.append(bands_view(page))
+        else:
+            page.views.append(not_found_view(e.route))
 
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD, on_click=increment_click
-    )
-    page.add(
-        ft.SafeArea(
-            ft.Container(
-                counter,
-                alignment=ft.alignment.center,
-            ),
-            expand=True,
-        )
-    )
+        page.update()
 
+    page.on_route_change = route_change
+    page.go("/")  # 初期ページを設定
 
-ft.app(main)
+ft.app(target=main)
