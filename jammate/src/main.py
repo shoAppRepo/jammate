@@ -1,26 +1,20 @@
 import flet as ft
 
-
 def main(page: ft.Page):
-    counter = ft.Text("0", size=50, data=0)
+    # ルート変更時の処理
+    def route_change(e: ft.RouteChangeEvent):
+        page.views.clear()  # 既存のビューをクリア
 
-    def increment_click(e):
-        counter.data += 1
-        counter.value = str(counter.data)
-        counter.update()
+        if e.route == "/":
+            page.views.append(ft.View("/", [ft.Text("Home Page")]))
+        elif e.route == "/about":
+            page.views.append(ft.View("/about", [ft.Text("About Page")]))
+        else:
+            page.views.append(ft.View(e.route, [ft.Text("404 Not Found")]))
 
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD, on_click=increment_click
-    )
-    page.add(
-        ft.SafeArea(
-            ft.Container(
-                counter,
-                alignment=ft.alignment.center,
-            ),
-            expand=True,
-        )
-    )
+        page.update()
 
+    page.on_route_change = route_change  # ルート変更時のハンドラ設定
+    page.go("/")  # 初期ルートを設定
 
-ft.app(main)
+ft.app(target=main)
