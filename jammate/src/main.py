@@ -1,20 +1,22 @@
 import flet as ft
+from pages.home.page import home_view
+from pages.bands.page import bands_view
+from pages.not_found import not_found_view
 
 def main(page: ft.Page):
-    # ルート変更時の処理
     def route_change(e: ft.RouteChangeEvent):
-        page.views.clear()  # 既存のビューをクリア
+        page.views.clear()
 
         if e.route == "/":
-            page.views.append(ft.View("/", [ft.Text("Home Page")]))
-        elif e.route == "/about":
-            page.views.append(ft.View("/about", [ft.Text("About Page")]))
+            page.views.append(home_view(page))
+        elif e.route == "/bands":
+            page.views.append(bands_view(page))
         else:
-            page.views.append(ft.View(e.route, [ft.Text("404 Not Found")]))
+            page.views.append(not_found_view(e.route))
 
         page.update()
 
-    page.on_route_change = route_change  # ルート変更時のハンドラ設定
-    page.go("/")  # 初期ルートを設定
+    page.on_route_change = route_change
+    page.go("/")  # 初期ページを設定
 
 ft.app(target=main)
