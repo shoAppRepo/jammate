@@ -1,16 +1,14 @@
 from __future__ import annotations
 import dataclasses
+from domain.band import Band
 from value_objects.uuid import Uuid
-from band import Band
+from value_objects.profile import Profile
 
 @dataclasses.dataclass(frozen=True)
 class Member:
     id: Uuid
-    name: str
     # TODO: 楽器パート追加
-    introduction: str
-    icon_url: str
-    favorite_genres: str
+    profile: Profile
     joined_bands: list[Band]
 
     @classmethod
