@@ -1,4 +1,5 @@
 import abc
+from domain.event import Event
 
 class EventsRepo(metaclass=abc.ABCMeta):
     # TODO: イベント作成

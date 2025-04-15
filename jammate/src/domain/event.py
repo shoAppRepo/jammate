@@ -2,6 +2,7 @@ from __future__ import annotations
 import dataclasses
 import datetime
 from value_objects.uuid import Uuid
+from band import Band
 
 @dataclasses.dataclass(frozen=True)
 class Event:
@@ -10,7 +11,7 @@ class Event:
     location: str
     start_at: datetime
     memo: str
-    # TODO: 参加バンド追加    
+    performers: list[Band] 
 
     @classmethod
     def from_dict(cls, d):

@@ -1,4 +1,5 @@
 import abc
+from domain.band import Band
 
 class BandsRepo(metaclass=abc.ABCMeta):
     @abc.abstractmethod

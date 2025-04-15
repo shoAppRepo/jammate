@@ -1,3 +1,5 @@
+from bands_repo import BandsRepo
+from domain.band import Band
 
 class BandsRepoSupabase(BandsRepo):
   def create(self, event_id: str) -> Band:
